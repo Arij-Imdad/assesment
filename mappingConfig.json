@@ -1,0 +1,96 @@
+/* To specify the mapping configuration for the API gateway, we can define a JSON configuration file
+that describes how key-value pairs should be mapped between the gateway and different supplier APIs. 
+
+
+
+Source Characteristic: Represents the characteristic from the gateway request or supplier response.
+
+"name": The name of the characteristic.
+"value": The value of the characteristic.
+
+
+Destination Characteristic: Represents the characteristic to be used in the request to the supplier or in the response to the consumer.
+
+"name": The name of the characteristic.
+"value": The value of the characteristic.
+
+we can also specify an array of destination characteristics if you need to map a single source characteristic to multiple destination characteristics.
+*/
+
+{
+  "supplier1": [
+    {
+      // Map LINE_ID to LINE_IDENTIFIER
+      "source": {
+        "name": "LINE_ID",
+        "value": "12345"
+      },
+      "destination": {
+        "name": "LINE_IDENTIFIER",
+        "value": "12345"
+      }
+    },
+    {
+      // Map PROFILE to LINE_PROFILE
+      "source": {
+        "name": "PROFILE",
+        "value": "1"
+      },
+      "destination": {
+        "name": "LINE_PROFILE",
+        "value": "ABC/123"
+      }
+    }
+  ],
+  "supplier2": [
+    {
+      // Map LINE_IDENTIFIER to LINE_ID
+      "source": {
+        "name": "LINE_IDENTIFIER",
+        "value": "12345"
+      },
+      "destination": {
+        "name": "LINE_ID",
+        "value": "12345"
+      }
+    },
+    {
+      // Map LINE_PROFILE to PROFILE
+      "source": {
+        "name": "LINE_PROFILE",
+        "value": "ABC/123"
+      },
+      "destination": {
+        "name": "PROFILE",
+        "value": "1"
+      }
+    },
+    {
+      // Map UPSTREAM and DOWNSTREAM to PROFILE
+      "source": {
+        "name": "UPSTREAM",
+        "value": "12"
+      },
+      "destination": [
+        {
+          "name": "PROFILE",
+          "value": "2"
+        },
+        {
+          "name": "SERVICE",
+          "value": "A"
+        }
+      ]
+    },
+    {
+      "source": {
+        "name": "DOWNSTREAM",
+        "value": "1000"
+      },
+      "destination": {
+        "name": "PROFILE",
+        "value": "3"
+      }
+    }
+  ]
+}
